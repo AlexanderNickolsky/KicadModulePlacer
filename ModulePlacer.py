@@ -41,3 +41,4 @@ class ModulePlacer(pcbnew.ActionPlugin):
         # Proceed loading the file chosen by the user
             pathname = fileDialog.GetPath()
             self.processFile(pathname)
+        self.pcb.GetConnectivity().RecalculateRatsnest()
