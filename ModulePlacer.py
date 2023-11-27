@@ -22,7 +22,10 @@ class ModulePlacer(pcbnew.ActionPlugin):
                if len(mc) >= 3:
                    module = self.pcb.FindFootprintByReference(mc[0])
                    if module != None:
-                     module.SetPosition(pcbnew.wxPointMM(float(mc[1]),float(mc[2])))
+                     if hasattr(pcbnew, 'EDA_RECT'):
+                         module.SetPosition(pcbnew.wxPointMM(float(mc[1]),float(mc[2])))
+                     else:
+                         module.SetPosition(pcbnew.VECTOR2I_MM(float(mc[1]),float(mc[2])))
                      if len(mc) == 4:
                         module.SetOrientationDegrees(float(mc[3]))
                else:
